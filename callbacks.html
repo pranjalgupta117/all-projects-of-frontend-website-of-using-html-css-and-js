@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Callbacks</title>
+    <style>
+        /* General Reset */
+        body, h1, p, a {
+            margin: 0;
+            padding: 0;
+            font-family: 'Arial', sans-serif;
+        }
+        
+        body {
+            background-color: #f4f4f9;
+            color: #333;
+            line-height: 1.6;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        header {
+            background-color: #4CAF50;
+            color: white;
+            padding: 20px 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            width: 100%;
+            max-width: 800px;
+        }
+
+        header h1 {
+            font-size: 2.5rem;
+        }
+
+        header p {
+            margin-top: 10px;
+            font-size: 1rem;
+        }
+
+        section {
+            margin: 20px 0;
+            width: 100%;
+            max-width: 800px;
+            text-align: center;
+        }
+
+        button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 1rem;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        #output {
+            margin-top: 20px;
+            font-size: 1.2rem;
+            color: #333;
+        }
+
+        footer {
+            margin-top: 30px;
+            font-size: 0.9rem;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Understanding Callbacks</h1>
+        <p>A simple explanation of how callbacks work in programming.</p>
+    </header>
+    <section>
+        <div class="card">
+            <h2>What is a Callback?</h2>
+            <p>A callback is a function passed into another function as an argument, which is then invoked inside the outer function.</p>
+        </div>
+        <div class="card">
+            <h2>Why Use Callbacks?</h2>
+            <p>Callbacks are useful to ensure certain code runs only after other code has completed, such as asynchronous tasks.</p>
+        </div>
+    </section>
+
+    <section>
+        <button id="executeButton">Click Me</button>
+        <div id="output"></div>
+    </section>
+
+    <footer>
+        &copy; 2024 Programming Concepts
+    </footer>
+
+    <script>
+        // JavaScript to handle the button click and demonstrate a callback
+        document.getElementById('executeButton').addEventListener('click', () => {
+            const outputDiv = document.getElementById('output');
+
+            // Callback function to update the text
+            function callback() {
+                outputDiv.textContent = "Callback executed after 5 seconds";
+            }
+
+            // Simulate a delay using setTimeout
+            outputDiv.textContent = "Waiting for 5 seconds...";
+            setTimeout(callback, 5000);
+        });
+    </script>
+</body>
+</html>
+

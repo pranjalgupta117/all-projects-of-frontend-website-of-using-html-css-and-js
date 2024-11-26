@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Promises.assignment</title>
+    <style>
+        /* General Reset */
+        body, h1, p, button {
+            margin: 0;
+            padding: 0;
+            font-family: 'Arial', sans-serif;
+        }
+
+        body {
+            background-color: #eef2f3;
+            color: #333;
+            line-height: 1.6;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        header {
+            background-color: #007BFF;
+            color: white;
+            padding: 20px 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            width: 100%;
+            max-width: 800px;
+        }
+
+        header h1 {
+            font-size: 2.5rem;
+        }
+
+        header p {
+            margin-top: 10px;
+            font-size: 1rem;
+        }
+
+        section {
+            margin: 20px 0;
+            width: 100%;
+            max-width: 800px;
+            text-align: center;
+        }
+
+        .card {
+            background: white;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 15px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        button {
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 1rem;
+            cursor: pointer;
+            border-radius: 5px;
+            margin-top: 20px;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        #output {
+            margin-top: 20px;
+            font-size: 1rem;
+            color: #333;
+            text-align: left;
+            background: #fff;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        footer {
+            margin-top: 30px;
+            font-size: 0.9rem;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Understanding Promises</h1>
+        <p>A simple explanation of Promises in JavaScript.</p>
+    </header>
+
+    <section>
+        <div class="card">
+            <h2>What is a Promise?</h2>
+            <p>A Promise is an object in JavaScript that represents the eventual completion (or failure) of an asynchronous operation and its resulting value.</p>
+        </div>
+        <button id="fetchButton">Fetch Posts</button>
+        <div id="output">Click the button to load data.</div>
+    </section>
+
+    <footer>
+        &copy; 2024 Programming Concepts
+    </footer>
+
+    <script>
+        // JavaScript to handle Promise-based data fetching
+        document.getElementById('fetchButton').addEventListener('click', () => {
+            const outputDiv = document.getElementById('output');
+
+            // Create a Promise to fetch data
+            const fetchPosts = () => {
+                return new Promise((resolve, reject) => {
+                    outputDiv.textContent = "Loading...";
+                    fetch('https://dummyjson.com/posts')
+                        .then(response => {
+                            if (response.ok) {
+                                return response.json();
+                            } else {
+                                throw new Error("Network response was not ok");
+                            }
+                        })
+                        .then(data => resolve(data))
+                        .catch(error => reject(error));
+                });
+            };
+
+            // Use the Promise to fetch data and update the DOM
+            fetchPosts()
+                .then(data => {
+                    outputDiv.textContent = ''; // Clear "Loading..."
+                    const posts = data.posts;
+                    posts.forEach(post => {
+                        const postElement = document.createElement('p');
+                        postElement.textContent = `• ${post.title}`;
+                        outputDiv.appendChild(postElement);
+                    });
+                })
+                .catch(error => {
+                    outputDiv.textContent = "Error fetching data. Please try again.";
+                    console.error("Error:", error);
+                });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,27 @@
+.container{
+    width: 2000px;
+    height: 1800px;
+    background-color: aqua;
+    border: 2px solid black;
+}
+.box{
+    width:300px;
+    height:200px;
+    background-color: brown;
+    margin: 10px;
+    position: relative;
+    top: 0px;
+    left: 0px;
+    animation-name: bottomMovement;
+    animation-duration: 10s;
+}
+@keyframes bottomMovement{
+    from{
+        top: 0px;
+        left: 0px;
+    }
+    to{
+        top: 0px;
+        left: 1400px;
+    }
+}
